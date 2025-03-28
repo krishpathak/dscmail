@@ -33,13 +33,13 @@ app.use(cors(
 ))
 
 
-app.post('/createToken/:token', (req, res) => {
+app.get('/createToken/:token', (req, res) => {
     try {
         res.cookie('mail_token', String(req.params.token), {
             maxAge: 24 * 60 * 60 * 1000 * 3, 
             httpOnly: true,  
         });
-        res.json({ message: "success" }); 
+        res.status(200).json({ message: "success" }); 
     } catch (e) {
         console.log(e);
         res.status(500).json({ message: e.message });
