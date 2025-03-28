@@ -31,7 +31,7 @@ router.get('/sent',verifyToken,async (req,res)=>{
     }
 })
 
-router.get('/recieved',verifyToken,async(req,res)=>{
+router.get('/received',verifyToken,async(req,res)=>{
     try{
         const {mail}=await Mail.findAll({mail_reciever:req.id});
         res.status(200).send(mail);
