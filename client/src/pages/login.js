@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import StarBackground from '../components/StarBackground';
+import StarBackground from '../components/StarBackground.js';
 import { Link, useNavigate } from 'react-router-dom';
 import Alerts from '../components/alerts.js';
 

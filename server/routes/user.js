@@ -8,7 +8,7 @@ const verifyToken = require("../middleware/verifyToken")
 const nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 require('dotenv').config()
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = "KrishPathak";
 router.post('/cheak', [
     body('email', "Enter the correct email").isEmail(),
     body('password', "Enter mininmun 6 letter passowrd").isLength(6)
@@ -226,7 +226,7 @@ router.post('/login', [
 
     }
     catch(err) {
-        // console.log(err)
+        console.log(err)
         return res.status(500).json({ message: "Sorry! Server error has been detected" })
     }
 })
@@ -382,24 +382,24 @@ router.put('/changepass', async (req, res) => {
 }
 )
 
-// router.get('/:id',async(req,res)=>{
-//     const user = await User.findById(req.params.id);
-//     if (!user) return res.status(404).json({ message: 'User not found' });
-//     res.status(200).json(user);
-// })
+router.get('/:id',async(req,res)=>{
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.status(200).json(user);
+})
 
-// router.get('/check/:id',verifyToken,async(req,res)=>{
-//     try{
-//         const id=req.params.id;
-//         if(id==req.id){
-//             return res.status(200).json({ message: 'true' });
-//         }
-//         return res.status(200).json({message:'false'});
-//     }catch(e){
-//         console.log(e);
-//         return res.status(500).json({ message: 'Server error' });
-//     }
-// })
+router.get('/check/:id',verifyToken,async(req,res)=>{
+    try{
+        const id=req.params.id;
+        if(id==req.id){
+            return res.status(200).json({ message: 'true' });
+        }
+        return res.status(200).json({message:'false'});
+    }catch(e){
+        console.log(e);
+        return res.status(500).json({ message: 'Server error' });
+    }
+})
  
 
 

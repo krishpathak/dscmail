@@ -33,18 +33,22 @@ app.use(cors(
 ))
 
 
-app.get('/createToken/:token' ,(req,res)=>{
-    try{
+app.post('/createToken/:token', (req, res) => {
+    try {
         res.cookie('mail_token', String(req.params.token), {
             maxAge: 24 * 60 * 60 * 1000 * 3, 
-        }).json({ message: "success" });
-    }catch(e){
+            httpOnly: true,  
+        });
+        res.json({ message: "success" }); 
+    } catch (e) {
         console.log(e);
-        res.status(500).json({message:e.message})
+        res.status(500).json({ message: e.message });
     }
-})
+});
+
 
 app.use('/auth',authRoutes)
+app.use('/mail',require('./routes/mailRouter'));
 app.get('/',(req,res)=>{
     res.send("server is running");
 })
